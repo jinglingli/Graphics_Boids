@@ -1,0 +1,53 @@
+CS312 Assignment 3: 3D Flocking
+Author: Jingling Li & Ziyan Yang
+Contact: jli06@brynmawr.edu | zyang@brynmawr.edu
+
+This project fulfilled all features/requirements with no memory leaks and it has the following modifications along with something you want to pay attention to:
+
+Keyboard controls:
+- ‘Q’ / ‘q’/ ‘ESC’ : clear memory and exit the program
+- ‘+’ : add a new bird randomly within GENERAL_XY_RANGE (15000)
+- ‘-’ : delete the last added bird
+- ‘P’ / ‘p’: pause the program
+- ‘F’ / ‘f’: switch to default view
+- ‘T’ / ‘t’: switch to trailing view
+- ‘S’ / ‘s’: switch to side view
+- ‘D’ / ‘d’: update for one time during pause to show single step
+- ‘Z’ / ‘z’: zoom in to see the details of the current view
+- ‘X’ / ‘x’: zoom out
+- KEY_LEFT: the goal turns left by a predefined degree
+- KEY_RIGHT: the goal turns right
+- KEY_UP: the goal goes up by a predefined height
+- KEY_DOWN: the goal goes down
+- ‘B’ / ‘b’: speed up the goal by a predefined rate
+- ‘V’ / ‘v’: slow down the goal
+
+By default, all of the keys are functional when the program is paused.
+The following keys can be repeatedly pressed: ‘D’/‘d’, ‘Z’/‘z’, ‘X’/‘x’, ‘B’/‘b’, ‘V’/‘v’, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN
+
+Extra Credit Features implemented:
+1. Shadows: each bird’s shadow also matches with the way it flaps during the movement.
+2. Flapping: the initial degree between wings and vertical line of each bird is randomly generated in a range and the frequency of flapping of each bird also differs.
+3. Obstacles: the obstacles we implemented are of the shape of a long and slim cuboid. The birds will avoid the obstacles by changing directions.
+4. Zoom in/Zoom out: we implement the zoom in and zoom out for different views and in side view, the zoom in feature can check conditions of both sides of the objects if repeating the key. This feature can be helpful in debugging and having a more stable view.
+
+Other Notes:
+1. We implement separation, cohesion and alignment rules based on the pseudo code found in this page (http://www.kfish.org/boids/pseudocode.html).
+2. We use a global linked list to store the randomly created boids that needed to be drawn and we will delete the last added bird when the user pressed ‘-’.
+3. The Steerable Goal in our project is a colored cube of side length 45 units. We use the arrow keys left/right/up/down to control the goal’s movement, and ‘v’ for slowing down and ‘b’ for speeding up.
+4. The default viewing position is at (10, 0, 10000) and the initial steerable goal position is at (100, 0, 4000). Each boid is 50 units in length.
+5. When the goal hitted the boundary of the checkerboard (which can be seen as a huge cube with side length of 20000 units), it will bounce back and turn 180 degrees.
+6. The goal can go through the obstacles because we want it to attract birds to reach and escape from the obstacles.
+7. The input file for obstacles’ coordinates and radius have to be in the format where the first line denotes the number of obstacles (10 is the max number of obstacles we allowed in the program for better bird’s behaviors) and each following line denote the x,y,z coordinates along with radius for the corresponding obstacle.
+For example,
+2
+3000,2000,4000,600
+-3000,-2000,-4000,800
+Here, 2 is the number of obstacles and the first obstacle is at position (3000,2000,4000) with a radius of 600 units.
+8. By default, assume we have an obstacle O with radius r, the bird will not start to avoid O until it is within the radius r of O; then it will fly either to the right/left following the tangent line to avoid the obstacle until the distance between it and O is larger than 2r.
+9. Note: the input file for obstacles should be named as “obstacles_position.txt” and be included in the same directory of the program.
+
+How to run:
+Type make
+Then execute ./hw3
+
